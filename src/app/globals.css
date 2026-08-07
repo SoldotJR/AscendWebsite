@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+:root {
+  /* Ascend brand — cool navy / banner blue, clean academic surfaces */
+  --background: #f3f6fb;
+  --foreground: #0b1220;
+  --surface: #ffffff;
+  --surface-muted: #e8eef7;
+  --card: #ffffff;
+  --border: rgba(15, 45, 95, 0.1);
+  --primary: #0f3d8c;
+  --primary-foreground: #f8fafc;
+  --royal: #1e60b5;
+  --accent-gold: #e8b923;
+  --accent-emerald: #0f766e;
+  --accent-sky: #5ba3e0;
+  --muted: #5b6b84;
+  --muted-foreground: #3f4f68;
+  --ring: #1e60b5;
+  --hero-overlay: rgba(11, 30, 70, 0.5);
+  --nav-bg: rgba(243, 246, 251, 0.92);
+  --nav-bg-scrolled: rgba(255, 255, 255, 0.96);
+  --nav-soft-blue: #d9e8fa;
+  --nav-soft-blue-text: #0f3d8c;
+  --shadow-soft: 0 18px 40px rgba(15, 45, 95, 0.08);
+  --font-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.dark {
+  --background: #07111f;
+  --foreground: #f8fafc;
+  --surface: #0d1829;
+  --surface-muted: #122033;
+  --card: #15263c;
+  --border: rgba(255, 255, 255, 0.08);
+  --primary: #3b82f6;
+  --primary-foreground: #f8fafc;
+  --royal: #5ba3e0;
+  --accent-gold: #e8b923;
+  --accent-emerald: #34d399;
+  --accent-sky: #7dd3fc;
+  --muted: #94a3b8;
+  --muted-foreground: #cbd5e1;
+  --ring: #5ba3e0;
+  --hero-overlay: rgba(7, 17, 31, 0.72);
+  --nav-bg: rgba(7, 17, 31, 0.88);
+  --nav-bg-scrolled: rgba(13, 24, 41, 0.96);
+  --nav-soft-blue: #1a3355;
+  --nav-soft-blue-text: #93c5fd;
+  --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-royal: var(--royal);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-emerald: var(--accent-emerald);
+  --color-accent-sky: var(--accent-sky);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-helvetica);
+  --font-serif: var(--font-helvetica);
+  --shadow-soft: var(--shadow-soft);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background:
+    linear-gradient(180deg, #e9f0f9 0%, #f3f6fb 28%, #f3f6fb 100%);
+  color: var(--foreground);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-serif,
+.font-sans {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.dark body {
+  background:
+    linear-gradient(180deg, #0a1628 0%, #07111f 32%, #07111f 100%);
+}
+
+::selection {
+  background: color-mix(in oklab, var(--royal) 35%, transparent);
+}
+
+.container-ascend {
+  width: min(100% - 1.5rem, 1200px);
+  margin-inline: auto;
+}
+
+.section-padding {
+  padding-block: clamp(2.25rem, 4vw, 3.5rem);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--royal);
+}
+
+.prose-ascend {
+  max-width: 62ch;
+  color: var(--muted-foreground);
+  line-height: 1.65;
+}
+
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+.site-header {
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: blur(0px);
+  transition:
+    background-color 420ms ease,
+    border-color 420ms ease,
+    backdrop-filter 420ms ease,
+    box-shadow 420ms ease,
+    padding 420ms ease,
+    color 420ms ease;
+}
+
+.site-header.is-scrolled {
+  background-color: var(--nav-bg-scrolled);
+  border-bottom-color: color-mix(in oklab, var(--border) 70%, transparent);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 10px 30px rgba(15, 45, 95, 0.06);
+}
+
+.dark .site-header.is-scrolled {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--royal));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.mesh-panel {
+  background:
+    linear-gradient(180deg, #ffffff, #f0f5fb),
+    radial-gradient(circle at 18% 15%, rgba(30, 96, 181, 0.12), transparent 42%),
+    radial-gradient(circle at 85% 0%, rgba(232, 185, 35, 0.1), transparent 36%);
+}
+
+.dark .mesh-panel {
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, transparent), var(--card)),
+    radial-gradient(circle at 18% 15%, rgba(91, 163, 224, 0.14), transparent 42%),
+    radial-gradient(circle at 85% 0%, rgba(232, 185, 35, 0.08), transparent 36%);
+}
