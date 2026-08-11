@@ -26,7 +26,7 @@ export const siteConfig = {
     "https://www.google.com/maps?q=Thaketa+Industrial+Zone+Yangon+Myanmar&output=embed",
 } as const;
 
-/** High-school course pathways shown as separate Courses menu tabs */
+/** High-school programme pathways shown as separate Programmes menu tabs */
 export const courseLinks = [
   { title: "IGCSE", href: "/academics/igcse" },
   { title: "IAL", href: "/academics/a-levels" },
@@ -41,11 +41,11 @@ export type NavItem = {
   children?: readonly { title: string; href: string }[];
 };
 
-/** Primary header tabs — Courses lists each pathway as its own tab */
+/** Primary header tabs — Programmes lists each pathway as its own tab */
 export const navigation: readonly NavItem[] = [
   { title: "Home", href: "/" },
   { title: "About", href: "/about" },
-  { title: "Courses", href: "/academics", children: courseLinks },
+  { title: "Programmes", href: "/academics", children: courseLinks },
   { title: "Clubs & Activities", href: "/campus-life" },
   { title: "Faculty", href: "/faculty" },
   { title: "News", href: "/news" },

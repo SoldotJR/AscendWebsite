@@ -5,23 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Menu, Search, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { mobileExtraLinks, navigation, siteConfig, type NavItem } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
-
-const searchSuggestions = [
-  { label: "IGCSE", href: "/academics/igcse" },
-  { label: "IAL", href: "/academics/a-levels" },
-  { label: "OSSD", href: "/academics/ossd" },
-  { label: "GED", href: "/academics/ged" },
-  { label: "Pre-IGCSE", href: "/academics/pre-igcse" },
-  { label: "All Courses", href: "/academics" },
-  { label: "Clubs & Activities", href: "/campus-life" },
-  { label: "Contact", href: "/contact" },
-  { label: "FAQ", href: "/faq" },
-];
 
 function NavLink({
   item,
@@ -57,9 +44,8 @@ function NavLink({
     return (
       <Link
         href={item.href}
-        className={className}
+        className={cn(className, isActive && "text-primary")}
         onClick={onNavigate}
-        data-active={isActive || undefined}
       >
         {item.title}
       </Link>
@@ -75,11 +61,10 @@ function NavLink({
     >
       <button
         type="button"
-        className={cn(className, "inline-flex items-center gap-1")}
+        className={cn(className, "inline-flex items-center gap-1", isActive && "text-primary")}
         aria-expanded={open}
         aria-haspopup="menu"
         onClick={() => setOpen((value) => !value)}
-        data-active={isActive || undefined}
       >
         {item.title}
         <ChevronDown
@@ -96,22 +81,20 @@ function NavLink({
             className="absolute left-0 top-full z-50 pt-2"
             role="menu"
           >
-            <div className="min-w-[11rem] overflow-hidden rounded-2xl border border-border bg-white p-1.5 shadow-soft">
+            <div className="min-w-[12rem] overflow-hidden rounded-xl border border-border bg-white py-2 shadow-soft">
               <Link
                 href={item.href}
                 role="menuitem"
                 className={cn(
-                  "block rounded-xl px-3.5 py-2 text-sm font-semibold text-[#0B1220] transition",
-                  "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
-                  pathname === item.href &&
-                    "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
+                  "block px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition hover:bg-[#f3f6fb] hover:text-primary",
+                  pathname === item.href && "text-primary"
                 )}
                 onClick={() => {
                   setOpen(false);
                   onNavigate?.();
                 }}
               >
-                All Courses
+                All Programmes
               </Link>
               {item.children?.map((child) => (
                 <Link
@@ -119,10 +102,8 @@ function NavLink({
                   href={child.href}
                   role="menuitem"
                   className={cn(
-                    "block rounded-xl px-3.5 py-2 text-sm font-semibold text-[#0B1220] transition",
-                    "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
-                    pathname === child.href &&
-                      "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
+                    "block px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition hover:bg-[#f3f6fb] hover:text-primary",
+                    pathname === child.href && "text-primary"
                   )}
                   onClick={() => {
                     setOpen(false);
@@ -142,20 +123,8 @@ function NavLink({
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [coursesOpen, setCoursesOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [query, setQuery] = useState("");
-  const searchRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -167,163 +136,51 @@ export function SiteHeader() {
   useEffect(() => {
     setOpen(false);
     setCoursesOpen(false);
-    setSearchOpen(false);
-    setQuery("");
   }, [pathname]);
 
-  useEffect(() => {
-    if (searchOpen) {
-      inputRef.current?.focus();
-    }
-  }, [searchOpen]);
-
-  useEffect(() => {
-    const onPointerDown = (event: MouseEvent) => {
-      if (!searchRef.current?.contains(event.target as Node)) {
-        setSearchOpen(false);
-      }
-    };
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setSearchOpen(false);
-    };
-    document.addEventListener("mousedown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, []);
-
-  const filtered = searchSuggestions.filter((item) =>
-    query ? item.label.toLowerCase().includes(query.toLowerCase()) : true
-  );
-
-  const navLinkClass = (active: boolean) =>
-    cn(
-      "focus-ring rounded-xl px-3.5 py-2 text-sm font-semibold text-[#0B1220] transition duration-300",
-      "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
-      "data-[active]:bg-[var(--nav-soft-blue)] data-[active]:text-[var(--nav-soft-blue-text)]",
-      active && "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
-    );
+  const navLinkClass =
+    "px-2.5 py-2 text-[15px] font-bold text-[#0B1220] transition hover:text-primary xl:px-3";
 
   return (
     <>
-      <header
-        className={cn(
-          "site-header fixed inset-x-0 top-0 z-50",
-          scrolled || open ? "is-scrolled py-3" : "py-4"
-        )}
-      >
-        <div className="container-ascend flex items-center justify-between gap-3">
-          <Link href="/" className="focus-ring relative z-10 flex shrink-0 items-center gap-3 rounded-md">
-            <Image
-              src="/images/brand/logo.png"
-              alt={siteConfig.name}
-              width={160}
-              height={42}
-              className="h-9 w-auto object-contain transition duration-300 drop-shadow-sm"
-              priority
-            />
+      <header className="site-header fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white">
+        <div className="container-ascend flex h-[72px] items-center justify-between gap-4">
+          <Link href="/" className="focus-ring relative z-10 flex shrink-0 items-center rounded-md">
+            <span className="inline-flex items-center rounded-lg bg-[#0f3d8c] px-3 py-2">
+              <Image
+                src="/images/brand/logo.png"
+                alt={siteConfig.name}
+                width={160}
+                height={42}
+                className="h-8 w-auto object-contain"
+                priority
+              />
+            </span>
             <span className="sr-only">{siteConfig.name}</span>
           </Link>
 
           <nav
-            className="hidden items-center gap-1.5 rounded-2xl bg-white p-1.5 shadow-soft lg:flex dark:bg-white"
+            className="hidden flex-1 items-center justify-end gap-1 lg:flex xl:gap-2"
             aria-label="Primary pages"
           >
             {navigation.map((item) => (
-              <NavLink key={item.href} item={item} className={navLinkClass(false)} />
+              <NavLink key={item.href} item={item} className={navLinkClass} />
             ))}
-          </nav>
-
-          <div className="flex items-center gap-1 sm:gap-2">
-            <div ref={searchRef} className="relative flex items-center">
-              <div
-                className={cn(
-                  "flex items-center overflow-hidden rounded-full border transition-all duration-300 ease-out",
-                  searchOpen
-                    ? "w-[min(18rem,42vw)] border-border bg-white pl-3 pr-1 shadow-soft"
-                    : "w-10 border-transparent bg-white/90"
-                )}
-              >
-                <Search
-                  className={cn(
-                    "h-4 w-4 shrink-0 text-muted-foreground transition",
-                    !searchOpen && "hidden"
-                  )}
-                />
-                <input
-                  ref={inputRef}
-                  id="site-search"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search pages..."
-                  className={cn(
-                    "h-10 w-full bg-transparent px-2 text-sm text-foreground outline-none transition-opacity duration-200",
-                    searchOpen ? "opacity-100" : "pointer-events-none w-0 px-0 opacity-0"
-                  )}
-                  aria-label="Search site"
-                />
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  aria-label={searchOpen ? "Close search" : "Open search"}
-                  aria-expanded={searchOpen}
-                  className="text-foreground hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]"
-                  onClick={() => setSearchOpen((value) => !value)}
-                >
-                  {searchOpen ? <X className="h-4 w-4" /> : <Search className="h-4 w-4" />}
-                </Button>
-              </div>
-
-              <AnimatePresence>
-                {searchOpen ? (
-                  <motion.div
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 6 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute right-0 top-full z-50 mt-2 w-[min(20rem,85vw)] overflow-hidden rounded-2xl border border-border bg-white shadow-soft"
-                  >
-                    <div className="max-h-64 overflow-y-auto py-2">
-                      {filtered.length ? (
-                        filtered.map((item) => (
-                          <Link
-                            key={item.href}
-                            href={item.href}
-                            className="block px-4 py-2.5 text-sm text-foreground hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]"
-                            onClick={() => {
-                              setSearchOpen(false);
-                              setQuery("");
-                            }}
-                          >
-                            {item.label}
-                          </Link>
-                        ))
-                      ) : (
-                        <p className="px-4 py-3 text-sm text-muted-foreground">No matching pages</p>
-                      )}
-                    </div>
-                  </motion.div>
-                ) : null}
-              </AnimatePresence>
-            </div>
-
-            <ThemeToggle className="rounded-full bg-white text-foreground hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]" />
-            <Button asChild className="hidden sm:inline-flex" size="sm">
+            <Button asChild size="sm" className="ml-3">
               <Link href="/contact">Apply Now</Link>
             </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-full bg-white text-foreground hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)] lg:hidden"
-              aria-label={open ? "Close menu" : "Open menu"}
-              aria-expanded={open}
-              onClick={() => setOpen((v) => !v)}
-            >
-              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-          </div>
+          </nav>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-[#0B1220] hover:bg-[#f3f6fb] hover:text-primary lg:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
         </div>
       </header>
 
@@ -334,12 +191,9 @@ export function SiteHeader() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-y-0 right-0 z-40 w-full max-w-md border-l border-border bg-background px-6 pb-10 pt-24 shadow-soft lg:hidden"
+            className="fixed inset-y-0 right-0 z-40 w-full max-w-md border-l border-border bg-white px-6 pb-10 pt-24 shadow-soft lg:hidden"
           >
             <nav className="flex h-full flex-col gap-1 overflow-y-auto" aria-label="Mobile pages">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                Pages
-              </p>
               {navigation.map((item) => {
                 if (!item.children?.length) {
                   const active =
@@ -351,9 +205,8 @@ export function SiteHeader() {
                       key={item.href}
                       href={item.href}
                       className={cn(
-                        "rounded-xl bg-white px-3 py-3 text-lg font-medium text-[#0B1220] transition",
-                        "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
-                        active && "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
+                        "rounded-lg px-3 py-3 text-lg font-bold text-[#0B1220] transition hover:bg-[#f3f6fb] hover:text-primary",
+                        active && "text-primary"
                       )}
                       onClick={() => setOpen(false)}
                     >
@@ -363,10 +216,10 @@ export function SiteHeader() {
                 }
 
                 return (
-                  <div key={item.href} className="rounded-xl bg-white">
+                  <div key={item.href}>
                     <button
                       type="button"
-                      className="flex w-full items-center justify-between px-3 py-3 text-lg font-medium text-[#0B1220]"
+                      className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-lg font-bold text-[#0B1220]"
                       aria-expanded={coursesOpen}
                       onClick={() => setCoursesOpen((value) => !value)}
                     >
@@ -391,24 +244,20 @@ export function SiteHeader() {
                             <Link
                               href={item.href}
                               className={cn(
-                                "block rounded-lg px-3 py-2 text-base text-[#0B1220]",
-                                "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
-                                pathname === item.href &&
-                                  "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
+                                "block rounded-lg px-3 py-2 text-base font-semibold text-[#0B1220] hover:bg-[#f3f6fb] hover:text-primary",
+                                pathname === item.href && "text-primary"
                               )}
                               onClick={() => setOpen(false)}
                             >
-                              All Courses
+                              All Programmes
                             </Link>
                             {item.children.map((child) => (
                               <Link
                                 key={child.href}
                                 href={child.href}
                                 className={cn(
-                                  "block rounded-lg px-3 py-2 text-base text-[#0B1220]",
-                                  "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
-                                  pathname === child.href &&
-                                    "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
+                                  "block rounded-lg px-3 py-2 text-base font-semibold text-[#0B1220] hover:bg-[#f3f6fb] hover:text-primary",
+                                  pathname === child.href && "text-primary"
                                 )}
                                 onClick={() => setOpen(false)}
                               >
@@ -429,7 +278,7 @@ export function SiteHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="rounded-xl bg-white px-3 py-2.5 text-base text-[#0B1220] hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]"
+                  className="rounded-lg px-3 py-2.5 text-base font-semibold text-[#0B1220] hover:bg-[#f3f6fb] hover:text-primary"
                   onClick={() => setOpen(false)}
                 >
                   {item.title}

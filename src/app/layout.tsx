@@ -3,7 +3,6 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { ScrollProgress } from "@/components/layout/scroll-progress";
-import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -76,7 +75,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <SiteHeader />
           <main className="flex-1">{children}</main>
           <SiteFooter />
-          <WhatsAppButton />
         </ThemeProvider>
         <script
           type="application/ld+json"
