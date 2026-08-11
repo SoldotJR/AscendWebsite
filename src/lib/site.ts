@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "Ascend",
   tagline: "Ascend Higher. Achieve Greater.",
   description:
-    "Ascend International School is a Pearson-approved center offering accelerated pathways through IGCSE, International A Levels, GED, and OSSD—with personalized learning and university counselling for top global institutions.",
+    "Ascend International School is a Pearson-approved center offering accelerated pathways through IGCSE, International A Levels, GED, and OSSD. With a focus on personalized learning, students benefit from tailored university counselling and guidance designed to open doors to top global institutions. Beyond academics, a wide range of extracurricular opportunities encourages students to discover their passions and thrive as confident global citizens.",
   url: "https://www.ascendinternationalschool.org",
   locale: "en_MM",
   founded: 2024,
@@ -26,17 +26,31 @@ export const siteConfig = {
     "https://www.google.com/maps?q=Thaketa+Industrial+Zone+Yangon+Myanmar&output=embed",
 } as const;
 
-/** Primary header tabs — each opens its own page route */
-export const navigation = [
+/** High-school course pathways shown as separate Courses menu tabs */
+export const courseLinks = [
+  { title: "IGCSE", href: "/academics/igcse" },
+  { title: "IAL", href: "/academics/a-levels" },
+  { title: "OSSD", href: "/academics/ossd" },
+  { title: "GED", href: "/academics/ged" },
+  { title: "Pre-IGCSE", href: "/academics/pre-igcse" },
+] as const;
+
+export type NavItem = {
+  title: string;
+  href: string;
+  children?: readonly { title: string; href: string }[];
+};
+
+/** Primary header tabs — Courses lists each pathway as its own tab */
+export const navigation: readonly NavItem[] = [
   { title: "Home", href: "/" },
   { title: "About", href: "/about" },
-  { title: "Academics", href: "/academics" },
-  { title: "Admissions", href: "/admissions" },
-  { title: "Campus Life", href: "/campus-life" },
+  { title: "Courses", href: "/academics", children: courseLinks },
+  { title: "Clubs & Activities", href: "/campus-life" },
   { title: "Faculty", href: "/faculty" },
   { title: "News", href: "/news" },
   { title: "Contact", href: "/contact" },
-] as const;
+];
 
 /** Extra destinations listed in the mobile menu */
 export const mobileExtraLinks = [

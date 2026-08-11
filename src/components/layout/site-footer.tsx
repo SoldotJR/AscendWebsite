@@ -7,8 +7,8 @@ import { NewsletterForm } from "@/components/forms/newsletter-form";
 
 const quickLinks = [
   { title: "About", href: "/about" },
-  { title: "Admissions", href: "/admissions" },
-  { title: "Campus Life", href: "/campus-life" },
+  { title: "Courses", href: "/academics" },
+  { title: "Clubs & Activities", href: "/campus-life" },
   { title: "Faculty", href: "/faculty" },
   { title: "News", href: "/news" },
   { title: "FAQ", href: "/faq" },
@@ -70,13 +70,13 @@ export function SiteFooter() {
 
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">
-            Academics
+            Courses
           </h3>
           <ul className="mt-5 space-y-3 text-sm">
             {programs.map((program) => (
               <li key={program.slug}>
                 <Link href={program.href} className="text-muted-foreground hover:text-foreground">
-                  {program.title}
+                  {program.slug === "a-levels" ? "IAL" : program.shortTitle}
                 </Link>
               </li>
             ))}

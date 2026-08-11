@@ -51,7 +51,7 @@ export function HomeHero() {
               variant="outline"
               className="border-white/55 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
             >
-              <Link href="/academics">Explore Programs</Link>
+              <Link href="/academics">Explore Courses</Link>
             </Button>
           </div>
         </div>

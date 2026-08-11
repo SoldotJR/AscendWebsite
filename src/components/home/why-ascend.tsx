@@ -8,10 +8,9 @@ import {
   Target,
   Users,
 } from "lucide-react";
-import { features, stats } from "@/data/content";
+import { features } from "@/data/content";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FadeIn } from "@/components/ui/fade-in";
-import { Counter } from "@/components/ui/counter";
 
 const icons = {
   BadgeCheck,
@@ -36,24 +35,7 @@ export function WhyAscend() {
           />
         </FadeIn>
 
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat, index) => (
-            <FadeIn key={stat.label} delay={index * 0.04}>
-              <div className="rounded-2xl border border-border bg-card p-4">
-                <div className="text-3xl font-bold text-primary md:text-4xl">
-                  <Counter
-                    value={stat.value}
-                    suffix={stat.suffix}
-                    prefix={stat.prefix}
-                  />
-                </div>
-                <p className="mt-1.5 text-sm text-muted-foreground">{stat.label}</p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-
-        <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           {features.map((feature, index) => {
             const Icon = icons[feature.icon];
             return (

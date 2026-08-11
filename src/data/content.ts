@@ -80,7 +80,7 @@ export const programs: Program[] = [
   {
     slug: "a-levels",
     title: "International A Levels",
-    shortTitle: "A Levels",
+    shortTitle: "IAL",
     duration: "16-Month Intensive",
     overview:
       "Our rigorous 16-month program ensures students achieve top A-Level, SAT, and IELTS scores—providing the competitive edge needed for entry into the world’s elite universities.",
@@ -300,13 +300,6 @@ export const pillars = [
   },
 ] as const;
 
-export const stats = [
-  { label: "Pearson Approved", value: 1, suffix: "", prefix: "" },
-  { label: "Academic Pathways", value: 5, suffix: "+", prefix: "" },
-  { label: "University Destinations", value: 17, suffix: "+", prefix: "" },
-  { label: "GED Class Cap", value: 20, suffix: "", prefix: "" },
-] as const;
-
 export const newsArticles = [
   {
     slug: "igcse-cohort-opens",
@@ -437,6 +430,19 @@ export const galleryImages = [
   { src: "/images/campus/gallery-6.jpg", alt: "Campus community gathering", category: "Events" },
   { src: "/images/campus/gallery-7.jpg", alt: "Focused independent study", category: "Student Life" },
   { src: "/images/campus/gallery-8.jpg", alt: "Ascend campus exterior atmosphere", category: "Campus" },
+] as const;
+
+export type Club = {
+  name: string;
+  description: string;
+};
+
+export const clubs: Club[] = [
+  // Add each club here when ready, for example:
+  // {
+  //   name: "Debate Club",
+  //   description: "Students build confidence in public speaking, reasoning, and teamwork through structured debate practice.",
+  // },
 ] as const;
 
 export const blogPosts = [

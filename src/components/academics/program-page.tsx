@@ -17,7 +17,7 @@ export function ProgramPage({ program }: { program: Program }) {
         image={program.image}
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "Academics", href: "/academics" },
+          { label: "Courses", href: "/academics" },
           { label: program.title },
         ]}
       />

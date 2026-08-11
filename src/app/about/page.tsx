@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { founders, pillars, stats } from "@/data/content";
+import { founders, pillars } from "@/data/content";
 import { PageHero } from "@/components/layout/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FadeIn } from "@/components/ui/fade-in";
-import { Counter } from "@/components/ui/counter";
 import { HomeCTA } from "@/components/home/home-cta";
 
 export const metadata: Metadata = {
@@ -127,19 +126,6 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="bg-primary py-14 text-primary-foreground">
-        <div className="container-ascend grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <p className="font-serif text-5xl">
-                <Counter {...stat} />
-              </p>
-              <p className="mt-2 text-sm text-white/70">{stat.label}</p>
-            </div>
-          ))}
         </div>
       </section>
 

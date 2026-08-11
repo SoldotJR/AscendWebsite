@@ -5,25 +5,146 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Search, X } from "lucide-react";
-import { mobileExtraLinks, navigation, siteConfig } from "@/lib/site";
+import { ChevronDown, Menu, Search, X } from "lucide-react";
+import { mobileExtraLinks, navigation, siteConfig, type NavItem } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 const searchSuggestions = [
-  { label: "International A Levels", href: "/academics/a-levels" },
-  { label: "Admissions Process", href: "/admissions" },
-  { label: "University Counseling", href: "/university-counseling" },
-  { label: "Campus Life", href: "/campus-life" },
-  { label: "Contact Admissions", href: "/contact" },
+  { label: "IGCSE", href: "/academics/igcse" },
+  { label: "IAL", href: "/academics/a-levels" },
+  { label: "OSSD", href: "/academics/ossd" },
+  { label: "GED", href: "/academics/ged" },
+  { label: "Pre-IGCSE", href: "/academics/pre-igcse" },
+  { label: "All Courses", href: "/academics" },
+  { label: "Clubs & Activities", href: "/campus-life" },
+  { label: "Contact", href: "/contact" },
   { label: "FAQ", href: "/faq" },
 ];
+
+function NavLink({
+  item,
+  className,
+  onNavigate,
+}: {
+  item: NavItem;
+  className?: string;
+  onNavigate?: () => void;
+}) {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const hasChildren = Boolean(item.children?.length);
+
+  const isActive =
+    item.href === "/"
+      ? pathname === "/"
+      : pathname === item.href ||
+        pathname.startsWith(`${item.href}/`) ||
+        Boolean(item.children?.some((child) => pathname === child.href));
+
+  useEffect(() => {
+    if (!hasChildren) return;
+    const onPointerDown = (event: MouseEvent) => {
+      if (!ref.current?.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    return () => document.removeEventListener("mousedown", onPointerDown);
+  }, [hasChildren]);
+
+  if (!hasChildren) {
+    return (
+      <Link
+        href={item.href}
+        className={className}
+        onClick={onNavigate}
+        data-active={isActive || undefined}
+      >
+        {item.title}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        className={cn(className, "inline-flex items-center gap-1")}
+        aria-expanded={open}
+        aria-haspopup="menu"
+        onClick={() => setOpen((value) => !value)}
+        data-active={isActive || undefined}
+      >
+        {item.title}
+        <ChevronDown
+          className={cn("h-3.5 w-3.5 transition-transform duration-200", open && "rotate-180")}
+        />
+      </button>
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.18 }}
+            className="absolute left-0 top-full z-50 pt-2"
+            role="menu"
+          >
+            <div className="min-w-[11rem] overflow-hidden rounded-2xl border border-border bg-white p-1.5 shadow-soft">
+              <Link
+                href={item.href}
+                role="menuitem"
+                className={cn(
+                  "block rounded-xl px-3.5 py-2 text-sm font-semibold text-[#0B1220] transition",
+                  "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
+                  pathname === item.href &&
+                    "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
+                )}
+                onClick={() => {
+                  setOpen(false);
+                  onNavigate?.();
+                }}
+              >
+                All Courses
+              </Link>
+              {item.children?.map((child) => (
+                <Link
+                  key={child.href}
+                  href={child.href}
+                  role="menuitem"
+                  className={cn(
+                    "block rounded-xl px-3.5 py-2 text-sm font-semibold text-[#0B1220] transition",
+                    "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
+                    pathname === child.href &&
+                      "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
+                  )}
+                  onClick={() => {
+                    setOpen(false);
+                    onNavigate?.();
+                  }}
+                >
+                  {child.title}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [coursesOpen, setCoursesOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const searchRef = useRef<HTMLDivElement>(null);
@@ -45,6 +166,7 @@ export function SiteHeader() {
 
   useEffect(() => {
     setOpen(false);
+    setCoursesOpen(false);
     setSearchOpen(false);
     setQuery("");
   }, [pathname]);
@@ -76,8 +198,13 @@ export function SiteHeader() {
     query ? item.label.toLowerCase().includes(query.toLowerCase()) : true
   );
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+  const navLinkClass = (active: boolean) =>
+    cn(
+      "focus-ring rounded-xl px-3.5 py-2 text-sm font-semibold text-[#0B1220] transition duration-300",
+      "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
+      "data-[active]:bg-[var(--nav-soft-blue)] data-[active]:text-[var(--nav-soft-blue-text)]",
+      active && "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
+    );
 
   return (
     <>
@@ -105,18 +232,7 @@ export function SiteHeader() {
             aria-label="Primary pages"
           >
             {navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "focus-ring rounded-xl px-3.5 py-2 text-sm font-semibold text-[#0B1220] transition duration-300",
-                  "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
-                  isActive(item.href) &&
-                    "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
-                )}
-              >
-                {item.title}
-              </Link>
+              <NavLink key={item.href} item={item} className={navLinkClass(false)} />
             ))}
           </nav>
 
@@ -195,7 +311,7 @@ export function SiteHeader() {
 
             <ThemeToggle className="rounded-full bg-white text-foreground hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]" />
             <Button asChild className="hidden sm:inline-flex" size="sm">
-              <Link href="/admissions">Apply Now</Link>
+              <Link href="/contact">Apply Now</Link>
             </Button>
             <Button
               variant="ghost"
@@ -224,21 +340,88 @@ export function SiteHeader() {
               <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
                 Pages
               </p>
-              {navigation.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "rounded-xl bg-white px-3 py-3 text-lg font-medium text-[#0B1220] transition",
-                    "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
-                    isActive(item.href) &&
-                      "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
-                  )}
-                  onClick={() => setOpen(false)}
-                >
-                  {item.title}
-                </Link>
-              ))}
+              {navigation.map((item) => {
+                if (!item.children?.length) {
+                  const active =
+                    item.href === "/"
+                      ? pathname === "/"
+                      : pathname === item.href || pathname.startsWith(`${item.href}/`);
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        "rounded-xl bg-white px-3 py-3 text-lg font-medium text-[#0B1220] transition",
+                        "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
+                        active && "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
+                      )}
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div key={item.href} className="rounded-xl bg-white">
+                    <button
+                      type="button"
+                      className="flex w-full items-center justify-between px-3 py-3 text-lg font-medium text-[#0B1220]"
+                      aria-expanded={coursesOpen}
+                      onClick={() => setCoursesOpen((value) => !value)}
+                    >
+                      {item.title}
+                      <ChevronDown
+                        className={cn(
+                          "h-4 w-4 transition-transform duration-200",
+                          coursesOpen && "rotate-180"
+                        )}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {coursesOpen ? (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="space-y-1 px-2 pb-3">
+                            <Link
+                              href={item.href}
+                              className={cn(
+                                "block rounded-lg px-3 py-2 text-base text-[#0B1220]",
+                                "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
+                                pathname === item.href &&
+                                  "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
+                              )}
+                              onClick={() => setOpen(false)}
+                            >
+                              All Courses
+                            </Link>
+                            {item.children.map((child) => (
+                              <Link
+                                key={child.href}
+                                href={child.href}
+                                className={cn(
+                                  "block rounded-lg px-3 py-2 text-base text-[#0B1220]",
+                                  "hover:bg-[var(--nav-soft-blue)] hover:text-[var(--nav-soft-blue-text)]",
+                                  pathname === child.href &&
+                                    "bg-[var(--nav-soft-blue)] text-[var(--nav-soft-blue-text)]"
+                                )}
+                                onClick={() => setOpen(false)}
+                              >
+                                {child.title}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      ) : null}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
               <p className="mb-2 mt-6 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
                 More
               </p>
@@ -253,7 +436,7 @@ export function SiteHeader() {
                 </Link>
               ))}
               <Button asChild className="mt-6" size="lg">
-                <Link href="/admissions" onClick={() => setOpen(false)}>
+                <Link href="/contact" onClick={() => setOpen(false)}>
                   Apply Now
                 </Link>
               </Button>
