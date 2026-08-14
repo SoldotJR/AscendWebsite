@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 import { programs } from "@/data/content";
 import { PageHero } from "@/components/layout/page-hero";
 import { FadeIn } from "@/components/ui/fade-in";
-import { HomeCTA } from "@/components/home/home-cta";
 
 export const metadata: Metadata = {
   title: "Courses",
@@ -71,7 +70,6 @@ export default function AcademicsPage() {
           </div>
         </div>
       </section>
-      <HomeCTA />
     </>
   );
 }

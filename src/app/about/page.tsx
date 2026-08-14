@@ -4,7 +4,6 @@ import { founders, pillars } from "@/data/content";
 import { PageHero } from "@/components/layout/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FadeIn } from "@/components/ui/fade-in";
-import { HomeCTA } from "@/components/home/home-cta";
 
 export const metadata: Metadata = {
   title: "About Ascend",
@@ -162,8 +161,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      <HomeCTA />
     </>
   );
 }

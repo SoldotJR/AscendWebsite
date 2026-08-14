@@ -3,7 +3,6 @@ import Link from "next/link";
 import type { Program } from "@/data/content";
 import { PageHero } from "@/components/layout/page-hero";
 import { FadeIn } from "@/components/ui/fade-in";
-import { HomeCTA } from "@/components/home/home-cta";
 
 export function ProgramPage({ program }: { program: Program }) {
   return (
@@ -111,8 +110,6 @@ export function ProgramPage({ program }: { program: Program }) {
           </Link>
         </div>
       </section>
-
-      <HomeCTA />
     </>
   );
 }
