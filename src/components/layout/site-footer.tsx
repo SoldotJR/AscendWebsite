@@ -4,7 +4,6 @@ import { courseLinks, siteConfig } from "@/lib/site";
 
 const aboutLinks = [
   { title: "About Ascend", href: "/about" },
-  { title: "Faculty", href: "/faculty" },
   { title: "Contact", href: "/contact" },
 ];
 

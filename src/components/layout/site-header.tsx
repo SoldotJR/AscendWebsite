@@ -166,9 +166,6 @@ export function SiteHeader() {
             {navigation.map((item) => (
               <NavLink key={item.href} item={item} className={navLinkClass} />
             ))}
-            <Button asChild size="sm" className="ml-3">
-              <Link href="/contact">Apply Now</Link>
-            </Button>
           </nav>
 
           <Button
@@ -284,11 +281,6 @@ export function SiteHeader() {
                   {item.title}
                 </Link>
               ))}
-              <Button asChild className="mt-6" size="lg">
-                <Link href="/contact" onClick={() => setOpen(false)}>
-                  Apply Now
-                </Link>
-              </Button>
             </nav>
           </motion.div>
         ) : null}

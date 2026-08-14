@@ -47,7 +47,6 @@ export const navigation: readonly NavItem[] = [
   { title: "About", href: "/about" },
   { title: "Programmes", href: "/academics", children: courseLinks },
   { title: "Clubs & Activities", href: "/campus-life" },
-  { title: "Faculty", href: "/faculty" },
   { title: "News", href: "/news" },
   { title: "Contact", href: "/contact" },
 ];

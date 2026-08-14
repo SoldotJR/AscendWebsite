@@ -17,7 +17,7 @@ export function HomeHero() {
 
   return (
     <section ref={ref} className="overflow-hidden bg-white">
-      <div className="relative aspect-[16/9] w-full min-h-[360px] max-h-[78svh] sm:min-h-[480px]">
+      <div className="relative aspect-[16/9] w-full min-h-[420px] max-h-[88svh] sm:min-h-[560px]">
         <motion.div style={{ y }} className="absolute inset-0">
           <Image
             src="/images/campus/hero.jpg"
@@ -31,7 +31,7 @@ export function HomeHero() {
         </motion.div>
       </div>
 
-      <div className="relative overflow-hidden bg-white px-4 py-20 sm:py-28 md:py-32">
+      <div className="relative overflow-hidden bg-white px-4 py-28 sm:py-36 md:min-h-[420px] md:py-44">
         <div className="pointer-events-none absolute left-0 top-0 h-28 w-28 rounded-br-[4rem] border-b-[10px] border-r-[10px] border-b-accent-gold border-r-primary sm:h-36 sm:w-36" />
         <div className="pointer-events-none absolute bottom-0 right-0 h-28 w-28 rounded-tl-[4rem] border-l-[10px] border-t-[10px] border-l-primary border-t-accent-gold sm:h-36 sm:w-36" />
 
@@ -50,7 +50,7 @@ export function HomeHero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: 0.08 }}
-            className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl"
+            className="mt-6 text-base leading-relaxed text-[#1f2a3d] sm:text-lg md:text-xl"
           >
             {siteConfig.description}
           </motion.p>
