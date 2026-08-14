@@ -37,28 +37,28 @@ export function HomeHero() {
 
         <div className="container-ascend relative mx-auto max-w-3xl text-center">
           <motion.h1
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 36 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="font-serif text-3xl font-semibold leading-tight tracking-tight text-[#0B1220] sm:text-4xl md:text-5xl"
           >
             Welcome to {siteConfig.name}
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: 0.08 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
             className="mt-6 text-base leading-relaxed text-[#1f2a3d] sm:text-lg md:text-xl"
           >
             {siteConfig.description}
           </motion.p>
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: 0.14 }}
+            transition={{ duration: 0.65, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8"
           >
             <Link

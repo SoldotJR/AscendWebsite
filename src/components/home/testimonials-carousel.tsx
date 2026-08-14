@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { testimonials } from "@/data/content";
+import { FadeIn } from "@/components/ui/fade-in";
 
 export function TestimonialsCarousel() {
   const [index, setIndex] = useState(0);
@@ -33,9 +34,11 @@ export function TestimonialsCarousel() {
       </button>
 
       <div className="container-ascend">
-        <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl">
-          Why They Chose Ascend
-        </h2>
+        <FadeIn>
+          <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl">
+            Why They Chose Ascend
+          </h2>
+        </FadeIn>
 
         <div className="mt-10 grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <AnimatePresence mode="wait">

@@ -432,6 +432,34 @@ export const galleryImages = [
   { src: "/images/campus/gallery-8.jpg", alt: "Ascend campus exterior atmosphere", category: "Campus" },
 ] as const;
 
+export const extracurriculars = [
+  {
+    slug: "internship-program",
+    title: "Internship Program",
+    image: "/images/campus/gallery-4.jpg",
+    text: "Ascend students gain hands-on work experience through our internship program. So far, students have interned at organizations such as AYA Bank, Shop Doora, UNIFI, and Ascend International School itself. These placements allow students to develop professional skills, explore career paths, and build meaningful networks for the future.",
+  },
+  {
+    slug: "student-council",
+    title: "Student Council",
+    image: "/images/campus/gallery-6.jpg",
+    text: "Our Student Council empowers students to take leadership roles within the school. Members plan events, represent the student body, and collaborate with staff to improve school life. It’s a space where students learn public speaking, teamwork, and project management—all while making a positive impact on their community.",
+  },
+  {
+    slug: "clubs",
+    title: "Clubs",
+    image: "/images/campus/gallery-1.jpg",
+    href: "/campus-life/clubs",
+    text: "From science to debate to the arts, Ascend offers a range of clubs where students can pursue their interests and discover new ones. Clubs are student-driven, giving members the chance to lead projects, showcase talents, and build friendships across grade levels.",
+  },
+  {
+    slug: "field-trips",
+    title: "Field Trips & Educational Visits",
+    image: "/images/campus/gallery-5.jpg",
+    text: "Ascend organizes regular field trips to help students connect classroom knowledge with the real world. Recent visits include the Nuclear Information Center and FAME Pharmaceuticals, giving students direct insight into science, technology, and industry in Myanmar.",
+  },
+] as const;
+
 export type Club = {
   slug: string;
   name: string;

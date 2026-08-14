@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { programs } from "@/data/content";
+import { FadeIn } from "@/components/ui/fade-in";
 
 const courseOrder = ["igcse", "a-levels", "ossd", "ged", "pre-igcse"] as const;
 
@@ -62,14 +63,12 @@ export function AcademicPrograms() {
       onMouseLeave={() => setPaused(false)}
     >
       <div className="container-ascend">
-        <p className="eyebrow">Programmes</p>
-        <h2 className="mt-2 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-[#0B1220] md:text-4xl">
-          Our Programmes
-        </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#0B1220] md:text-base">
-          International high school pathways designed for ambitious students, with a clear route to
-          university.
-        </p>
+        <FadeIn>
+          <p className="eyebrow">Programmes</p>
+          <h2 className="mt-2 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-[#0B1220] md:text-4xl">
+            Our Programmes
+          </h2>
+        </FadeIn>
 
         <div className="relative mt-10">
           <button
@@ -100,7 +99,7 @@ export function AcademicPrograms() {
               {orderedPrograms.map((program) => (
                 <article
                   key={program.slug}
-                  className="flex h-full min-h-[28rem] shrink-0 flex-col overflow-hidden rounded-[1.25rem] bg-[#0f3d8c] shadow-soft sm:min-h-[30rem]"
+                  className="group flex h-full min-h-[28rem] shrink-0 flex-col overflow-hidden rounded-[1.25rem] bg-[#0f3d8c] shadow-soft transition duration-500 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(15,61,140,0.28)] sm:min-h-[30rem]"
                   style={{ width: `${cardWidth}%` }}
                 >
                   <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-primary">
@@ -108,9 +107,20 @@ export function AcademicPrograms() {
                       src={program.image}
                       alt={program.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition duration-700 ease-out group-hover:scale-110"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
+                    <div className="absolute inset-0 flex flex-col justify-end bg-[#0B1220]/75 p-5 opacity-0 transition duration-500 group-hover:opacity-100">
+                      <p className="line-clamp-4 text-sm leading-relaxed text-white/90">
+                        {program.overview}
+                      </p>
+                      <Link
+                        href={program.href}
+                        className="mt-4 inline-flex w-fit items-center rounded-md bg-accent-gold px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[#0B1220]"
+                      >
+                        Explore Programme
+                      </Link>
+                    </div>
                   </div>
                   <div className="flex flex-1 flex-col p-5 sm:p-6">
                     <span className="inline-flex w-fit rounded-full bg-accent-gold/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent-gold">

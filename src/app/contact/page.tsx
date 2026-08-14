@@ -13,16 +13,12 @@ export default function ContactPage() {
     <section className="bg-white pt-28 pb-20 sm:pt-32 sm:pb-24">
       <div className="container-ascend">
         <h1 className="max-w-2xl font-serif text-3xl font-semibold tracking-tight text-[#0B1220] sm:text-4xl md:text-5xl">
-          We&apos;re here to help.
+          We&apos;re here to help
         </h1>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="text-xl font-semibold text-[#0B1220]">Leave us a message</h2>
-            <p className="mt-2 text-sm leading-relaxed text-[#3f4f68]">
-              Ask a question or tell us which programme you are interested in. We will reply as soon
-              as we can.
-            </p>
             <div className="mt-8">
               <ContactForm />
             </div>

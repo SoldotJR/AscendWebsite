@@ -26,11 +26,8 @@ export default function AcademicsPage() {
           <FadeIn>
             <p className="eyebrow">Choose your route</p>
             <h2 className="mt-2 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-[#0B1220] md:text-4xl">
-              Courses for every next step.
+              Courses for every next step
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#0B1220] md:text-base">
-              Explore the course that fits your current stage, your pace, and your ambitions.
-            </p>
           </FadeIn>
           <div className="mt-10 space-y-6">
             {programs.map((program, index) => (

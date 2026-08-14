@@ -1,9 +1,12 @@
 import { cn } from "@/lib/utils";
 
+function headingText(title: string) {
+  return title.replace(/\.+$/, "");
+}
+
 export function SectionHeading({
   eyebrow,
   title,
-  description,
   align = "left",
   className,
 }: {
@@ -23,11 +26,8 @@ export function SectionHeading({
     >
       {eyebrow ? <p className="eyebrow mb-2">{eyebrow}</p> : null}
       <h2 className="text-3xl font-bold leading-tight tracking-tight text-foreground md:text-4xl">
-        {title}
+        {headingText(title)}
       </h2>
-      {description ? (
-        <p className="prose-ascend mt-3 text-sm md:text-base">{description}</p>
-      ) : null}
     </div>
   );
 }

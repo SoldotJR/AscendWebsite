@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const rasterPattern = /\.(jpe?g|png|webp|avif)$/i;
 
 export function ClubCard({ club, className }: { club: Club; className?: string }) {
-  const href = club.href ?? "/contact";
+  const href = club.href;
   const isRaster = Boolean(club.image && rasterPattern.test(club.image));
 
   return (
@@ -39,14 +39,16 @@ export function ClubCard({ club, className }: { club: Club; className?: string }
         </span>
         <h3 className="mt-3 text-xl font-semibold tracking-tight text-white">{club.name}</h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-white">{club.description}</p>
-        <Link
-          href={href}
-          aria-label={`Learn more about ${club.name}`}
-          className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-colors duration-300 hover:text-accent-gold"
-        >
-          Learn More
-          <ArrowRight className="h-4 w-4 text-accent-gold transition-transform duration-300 group-hover:translate-x-1" />
-        </Link>
+        {href ? (
+          <Link
+            href={href}
+            aria-label={`Learn more about ${club.name}`}
+            className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-colors duration-300 hover:text-accent-gold"
+          >
+            Learn More
+            <ArrowRight className="h-4 w-4 text-accent-gold transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        ) : null}
       </div>
     </article>
   );
