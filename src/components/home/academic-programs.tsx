@@ -57,16 +57,16 @@ export function AcademicPrograms() {
 
   return (
     <section
-      className="relative overflow-hidden bg-[#0f3d8c] py-16 sm:py-20"
+      className="section-padding relative overflow-hidden bg-white"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       <div className="container-ascend">
-        <p className="eyebrow text-accent-gold">Programmes</p>
-        <h2 className="mt-2 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-white md:text-4xl">
+        <p className="eyebrow">Programmes</p>
+        <h2 className="mt-2 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-[#0B1220] md:text-4xl">
           Our Programmes
         </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/80 md:text-base">
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#0B1220] md:text-base">
           International high school pathways designed for ambitious students, with a clear route to
           university.
         </p>
@@ -100,7 +100,7 @@ export function AcademicPrograms() {
               {orderedPrograms.map((program) => (
                 <article
                   key={program.slug}
-                  className="flex h-full min-h-[28rem] shrink-0 flex-col overflow-hidden rounded-[1.25rem] bg-white shadow-soft sm:min-h-[30rem]"
+                  className="flex h-full min-h-[28rem] shrink-0 flex-col overflow-hidden rounded-[1.25rem] bg-[#0f3d8c] shadow-soft sm:min-h-[30rem]"
                   style={{ width: `${cardWidth}%` }}
                 >
                   <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-primary">
@@ -113,19 +113,19 @@ export function AcademicPrograms() {
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-5 sm:p-6">
-                    <span className="inline-flex w-fit rounded-full bg-accent-gold/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#a67c0a]">
+                    <span className="inline-flex w-fit rounded-full bg-accent-gold/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent-gold">
                       {program.duration}
                     </span>
-                    <h3 className="mt-3 text-xl font-semibold tracking-tight text-primary">
+                    <h3 className="mt-3 text-xl font-semibold tracking-tight text-white">
                       {program.slug === "a-levels" ? "IAL" : program.shortTitle}
                     </h3>
-                    <p className="mt-2 line-clamp-4 flex-1 text-sm leading-relaxed text-[#0B1220]">
+                    <p className="mt-2 line-clamp-4 flex-1 text-sm leading-relaxed text-white">
                       {program.overview}
                     </p>
                     <Link
                       href={program.href}
                       aria-label={`Learn more about ${program.shortTitle}`}
-                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:text-accent-gold"
                     >
                       Learn More
                       <ArrowRight className="h-4 w-4 text-accent-gold" />
@@ -145,7 +145,7 @@ export function AcademicPrograms() {
               aria-label={`Go to programmes slide ${i + 1}`}
               onClick={() => setIndex(i)}
               className={`h-2.5 w-2.5 rounded-full transition ${
-                i === safeIndex ? "bg-accent-gold" : "bg-white/40 hover:bg-white/70"
+                i === safeIndex ? "bg-accent-gold" : "bg-primary/20 hover:bg-primary/40"
               }`}
             />
           ))}

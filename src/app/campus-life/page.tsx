@@ -23,14 +23,14 @@ export default function CampusLifePage() {
         ]}
       />
 
-      <section className="bg-[#0f3d8c] py-16 sm:py-20">
+      <section className="section-padding bg-white">
         <div className="container-ascend">
           <FadeIn>
-            <p className="eyebrow text-accent-gold">Explore</p>
-            <h2 className="mt-2 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-white md:text-4xl">
+            <p className="eyebrow">Explore</p>
+            <h2 className="mt-2 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-[#0B1220] md:text-4xl">
               Find the club that fits you.
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/80 md:text-base">
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#0B1220] md:text-base">
               From technology and debate to art, science, and community impact, every student can
               join a group, build new skills, and take part in life beyond the classroom.
             </p>
