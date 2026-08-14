@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="800" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07101e"/>
+      <stop offset="1" stop-color="#0f3d8c"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <g stroke="#5ba3e0" stroke-opacity="0.35" stroke-width="1.5">
+    <path d="M40 80H180V160H280"/>
+    <path d="M280 160H420V80H760"/>
+    <path d="M120 240H260V320H520V240H760"/>
+    <path d="M80 400H240V320"/>
+    <path d="M520 320V420H700"/>
+    <path d="M420 80V240"/>
+  </g>
+  <g fill="#e8b923">
+    <circle cx="180" cy="80" r="5"/>
+    <circle cx="280" cy="160" r="5"/>
+    <circle cx="420" cy="80" r="5"/>
+    <circle cx="260" cy="320" r="5"/>
+    <circle cx="520" cy="240" r="5"/>
+    <circle cx="520" cy="320" r="5"/>
+  </g>
+  <rect x="290" y="175" width="220" height="148" rx="16" fill="#0b1220" stroke="#5ba3e0" stroke-width="3"/>
+  <rect x="308" y="193" width="184" height="96" rx="8" fill="#12284a"/>
+  <path d="M340 230H460M340 252H420" stroke="#5ba3e0" stroke-width="4" stroke-linecap="round"/>
+  <rect x="360" y="323" width="80" height="8" rx="4" fill="#e8b923"/>
+  <rect x="250" y="330" width="300" height="14" rx="4" fill="#1a3358"/>
+</svg>

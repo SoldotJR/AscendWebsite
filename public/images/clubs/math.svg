@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="500" x2="800" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07101e"/>
+      <stop offset="1" stop-color="#0f3d8c"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <g stroke="#5ba3e0" stroke-opacity="0.22" stroke-width="1">
+    <path d="M80 80H720M80 140H720M80 200H720M80 260H720M80 320H720M80 380H720"/>
+    <path d="M140 50V430M220 50V430M300 50V430M380 50V430M460 50V430M540 50V430M620 50V430"/>
+  </g>
+  <path d="M100 360C220 360 280 80 400 80S580 360 700 360" stroke="#e8b923" stroke-width="5" fill="none"/>
+  <path d="M100 250H700" stroke="#f8fafc" stroke-opacity="0.45" stroke-width="2"/>
+  <path d="M400 60V420" stroke="#f8fafc" stroke-opacity="0.45" stroke-width="2"/>
+  <text x="118" y="120" fill="#e8b923" font-size="42" font-family="Georgia, serif">À</text>
+  <text x="620" y="150" fill="#5ba3e0" font-size="36" font-family="Georgia, serif"></text>
+  <text x="150" y="410" fill="#f8fafc" font-size="28" font-family="Georgia, serif" fill-opacity="0.8">x²</text>
+</svg>

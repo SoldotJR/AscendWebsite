@@ -433,17 +433,87 @@ export const galleryImages = [
 ] as const;
 
 export type Club = {
+  slug: string;
   name: string;
+  category: string;
   description: string;
+  /** Drop a photograph at this path (jpg/png/webp) to replace the illustrated cover. */
+  image?: string;
+  href?: string;
 };
 
 export const clubs: Club[] = [
-  // Add each club here when ready, for example:
+  {
+    slug: "tech",
+    name: "Tech",
+    category: "Technology",
+    description: "Explore technology, digital skills, innovation, and practical projects.",
+    image: "/images/clubs/tech.svg",
+  },
+  {
+    slug: "debate",
+    name: "Debate",
+    category: "Academic",
+    description: "Develop confidence, critical thinking, public speaking, and persuasive communication.",
+    image: "/images/clubs/debate.svg",
+  },
+  {
+    slug: "health-and-wellness",
+    name: "Health and Wellness",
+    category: "Wellbeing",
+    description: "Learn about healthy habits, wellbeing, fitness, and maintaining a balanced lifestyle.",
+    image: "/images/clubs/health-and-wellness.svg",
+  },
+  {
+    slug: "science",
+    name: "Science",
+    category: "Academic",
+    description: "Discover scientific ideas through experiments, exploration, and hands-on activities.",
+    image: "/images/clubs/science.svg",
+  },
+  {
+    slug: "chess",
+    name: "Chess",
+    category: "Strategy",
+    description: "Build strategic thinking, concentration, problem-solving, and decision-making skills.",
+    image: "/images/clubs/chess.svg",
+  },
+  {
+    slug: "math",
+    name: "Math",
+    category: "Academic",
+    description: "Explore mathematics beyond the classroom through challenges, puzzles, and problem-solving.",
+    image: "/images/clubs/math.svg",
+  },
+  {
+    slug: "art",
+    name: "Art",
+    category: "Creative",
+    description: "Express creativity through drawing, design, visual art, and creative projects.",
+    image: "/images/clubs/art.svg",
+  },
+  {
+    slug: "youth-for-impact",
+    name: "Youth For Impact",
+    category: "Community",
+    description: "Work together on meaningful ideas and projects that create a positive impact in the community.",
+    image: "/images/clubs/youth-for-impact.svg",
+  },
+  {
+    slug: "photo-and-videography",
+    name: "Photo And Videography",
+    category: "Creative",
+    description: "Learn photography and videography while capturing stories, events, and memorable moments.",
+    image: "/images/clubs/photo-and-videography.svg",
+  },
+  // Add a 10th club here — the grid will place it automatically:
   // {
-  //   name: "Debate Club",
-  //   description: "Students build confidence in public speaking, reasoning, and teamwork through structured debate practice.",
+  //   slug: "music",
+  //   name: "Music",
+  //   category: "Creative",
+  //   description: "Write a short description, then add /images/clubs/music.jpg when a photo is ready.",
   // },
-] as const;
+];
 
 export const blogPosts = [
   {

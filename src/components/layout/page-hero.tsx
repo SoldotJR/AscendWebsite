@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -10,6 +11,7 @@ export function PageHero({
   breadcrumbs,
   image = "/images/campus/hero.jpg",
   className,
+  children,
 }: {
   eyebrow?: string;
   title: string;
@@ -17,6 +19,7 @@ export function PageHero({
   breadcrumbs?: { label: string; href?: string }[];
   image?: string;
   className?: string;
+  children?: ReactNode;
 }) {
   return (
     <section className={cn("relative overflow-hidden pt-24", className)}>
@@ -35,6 +38,7 @@ export function PageHero({
             {description}
           </p>
         ) : null}
+        {children}
         <div className="mt-5 flex flex-wrap gap-2.5">
           <Link
             href="/admissions"
