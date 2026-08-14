@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { programs } from "@/data/content";
 
 const courseOrder = ["igcse", "a-levels", "ossd", "ged", "pre-igcse"] as const;
@@ -15,26 +15,31 @@ function getVisibleCount(width: number) {
 }
 
 export function AcademicPrograms() {
-  const orderedPrograms = courseOrder
-    .map((slug) => programs.find((program) => program.slug === slug))
-    .filter((program): program is (typeof programs)[number] => Boolean(program));
+  const orderedPrograms = useMemo(
+    () =>
+      courseOrder
+        .map((slug) => programs.find((program) => program.slug === slug))
+        .filter((program): program is (typeof programs)[number] => Boolean(program)),
+    []
+  );
 
   const [index, setIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    const update = () => setVisibleCount(getVisibleCount(window.innerWidth));
+    const update = () => {
+      const nextVisible = getVisibleCount(window.innerWidth);
+      setVisibleCount(nextVisible);
+      setIndex((current) => Math.min(current, Math.max(0, orderedPrograms.length - nextVisible)));
+    };
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
-  }, []);
+  }, [orderedPrograms.length]);
 
   const maxIndex = Math.max(0, orderedPrograms.length - visibleCount);
-
-  useEffect(() => {
-    setIndex((current) => Math.min(current, maxIndex));
-  }, [maxIndex]);
+  const safeIndex = Math.min(index, maxIndex);
 
   useEffect(() => {
     if (paused || maxIndex === 0) return;
@@ -57,11 +62,16 @@ export function AcademicPrograms() {
       onMouseLeave={() => setPaused(false)}
     >
       <div className="container-ascend">
-        <h2 className="text-center font-serif text-3xl font-semibold text-white sm:text-4xl md:text-5xl">
+        <p className="eyebrow text-accent-gold">Programmes</p>
+        <h2 className="mt-2 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-white md:text-4xl">
           Our Programmes
         </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/80 md:text-base">
+          International high school pathways designed for ambitious students, with a clear route to
+          university.
+        </p>
 
-        <div className="relative mt-12">
+        <div className="relative mt-10">
           <button
             type="button"
             onClick={prev}
@@ -81,19 +91,19 @@ export function AcademicPrograms() {
 
           <div className="overflow-hidden px-2 sm:px-6">
             <div
-              className="flex transition-transform duration-500 ease-out"
+              className="flex items-stretch transition-transform duration-500 ease-out"
               style={{
                 gap: `${gapPercent}%`,
-                transform: `translateX(-${index * (cardWidth + gapPercent)}%)`,
+                transform: `translateX(-${safeIndex * (cardWidth + gapPercent)}%)`,
               }}
             >
               {orderedPrograms.map((program) => (
                 <article
                   key={program.slug}
-                  className="flex min-h-[420px] shrink-0 flex-col overflow-hidden rounded-[1.75rem] bg-white shadow-soft sm:min-h-[460px]"
+                  className="flex h-full min-h-[28rem] shrink-0 flex-col overflow-hidden rounded-[1.25rem] bg-white shadow-soft sm:min-h-[30rem]"
                   style={{ width: `${cardWidth}%` }}
                 >
-                  <div className="relative h-56 shrink-0 sm:h-64">
+                  <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-primary">
                     <Image
                       src={program.image}
                       alt={program.title}
@@ -102,25 +112,24 @@ export function AcademicPrograms() {
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
-                  <div className="flex flex-1 flex-col p-6 sm:p-7">
-                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-royal">
+                  <div className="flex flex-1 flex-col p-5 sm:p-6">
+                    <span className="inline-flex w-fit rounded-full bg-accent-gold/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#a67c0a]">
                       {program.duration}
-                    </p>
-                    <h3 className="mt-2 font-serif text-2xl font-semibold text-[#0B1220]">
+                    </span>
+                    <h3 className="mt-3 text-xl font-semibold tracking-tight text-primary">
                       {program.slug === "a-levels" ? "IAL" : program.shortTitle}
                     </h3>
-                    <p className="mt-3 line-clamp-5 flex-1 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                    <p className="mt-2 line-clamp-4 flex-1 text-sm leading-relaxed text-[#0B1220]">
                       {program.overview}
                     </p>
-                    <div className="mt-5 flex items-end justify-between gap-3 border-t border-border pt-5">
-                      <Link
-                        href={program.href}
-                        className="inline-flex rounded-md bg-primary px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.08em] text-primary-foreground transition hover:opacity-90"
-                      >
-                        Explore Programme
-                      </Link>
-                      <span className="font-serif text-4xl leading-none text-accent-gold/70">”</span>
-                    </div>
+                    <Link
+                      href={program.href}
+                      aria-label={`Learn more about ${program.shortTitle}`}
+                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+                    >
+                      Learn More
+                      <ArrowRight className="h-4 w-4 text-accent-gold" />
+                    </Link>
                   </div>
                 </article>
               ))}
@@ -136,7 +145,7 @@ export function AcademicPrograms() {
               aria-label={`Go to programmes slide ${i + 1}`}
               onClick={() => setIndex(i)}
               className={`h-2.5 w-2.5 rounded-full transition ${
-                i === index ? "bg-accent-gold" : "bg-white/40 hover:bg-white/70"
+                i === safeIndex ? "bg-accent-gold" : "bg-white/40 hover:bg-white/70"
               }`}
             />
           ))}
