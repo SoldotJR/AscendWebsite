@@ -14,7 +14,7 @@ export function ClubCard({ club, className }: { club: Club; className?: string }
     <article
       id={club.slug}
       className={cn(
-        "group flex h-full w-full flex-col overflow-hidden rounded-[1.25rem] border border-border bg-card shadow-[0_10px_28px_rgba(15,45,95,0.06)] transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_22px_40px_rgba(15,45,95,0.12)]",
+        "group flex h-full w-full flex-col overflow-hidden rounded-[1.25rem] bg-white shadow-soft transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_22px_40px_rgba(15,45,95,0.18)]",
         className
       )}
     >
@@ -38,7 +38,7 @@ export function ClubCard({ club, className }: { club: Club; className?: string }
           {club.category}
         </span>
         <h3 className="mt-3 text-xl font-semibold tracking-tight text-primary">{club.name}</h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{club.description}</p>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-[#0B1220]">{club.description}</p>
         <Link
           href={href}
           aria-label={`Learn more about ${club.name}`}
