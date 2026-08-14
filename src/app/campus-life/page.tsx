@@ -22,11 +22,7 @@ export default function CampusLifePage() {
           { label: "Home", href: "/" },
           { label: "Clubs & Activities" },
         ]}
-      >
-        <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-accent-gold">
-          {clubs.length} clubs · Student activities · Something for everyone
-        </p>
-      </PageHero>
+      />
 
       <section className="section-padding">
         <div className="container-ascend">
