@@ -434,6 +434,13 @@ export const galleryImages = [
 
 export const extracurriculars = [
   {
+    slug: "clubs",
+    title: "Clubs",
+    image: "/images/campus/gallery-1.jpg",
+    href: "/campus-life/clubs",
+    text: "From science to debate to the arts, Ascend offers a range of clubs where students can pursue their interests and discover new ones. Clubs are student-driven, giving members the chance to lead projects, showcase talents, and build friendships across grade levels.",
+  },
+  {
     slug: "internship-program",
     title: "Internship Program",
     image: "/images/campus/gallery-4.jpg",
@@ -444,13 +451,6 @@ export const extracurriculars = [
     title: "Student Council",
     image: "/images/campus/gallery-6.jpg",
     text: "Our Student Council empowers students to take leadership roles within the school. Members plan events, represent the student body, and collaborate with staff to improve school life. It’s a space where students learn public speaking, teamwork, and project management—all while making a positive impact on their community.",
-  },
-  {
-    slug: "clubs",
-    title: "Clubs",
-    image: "/images/campus/gallery-1.jpg",
-    href: "/campus-life/clubs",
-    text: "From science to debate to the arts, Ascend offers a range of clubs where students can pursue their interests and discover new ones. Clubs are student-driven, giving members the chance to lead projects, showcase talents, and build friendships across grade levels.",
   },
   {
     slug: "field-trips",

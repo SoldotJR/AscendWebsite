@@ -28,11 +28,11 @@ export const siteConfig = {
 
 /** High-school programme pathways shown as separate Programmes menu tabs */
 export const courseLinks = [
-  { title: "IGCSE", href: "/academics/igcse" },
   { title: "IAL", href: "/academics/a-levels" },
+  { title: "IGCSE", href: "/academics/igcse" },
   { title: "OSSD", href: "/academics/ossd" },
-  { title: "GED", href: "/academics/ged" },
   { title: "Pre-IGCSE", href: "/academics/pre-igcse" },
+  { title: "GED", href: "/academics/ged" },
 ] as const;
 
 export type NavItem = {
