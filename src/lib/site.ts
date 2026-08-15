@@ -35,9 +35,17 @@ export const courseLinks = [
   { title: "GED", href: "/academics/ged" },
 ] as const;
 
+export const activityLinks = [
+  { title: "Clubs", href: "/campus-life/clubs" },
+  { title: "Internship Program", href: "/campus-life#internship-program" },
+  { title: "Student Council", href: "/campus-life#student-council" },
+  { title: "Field Trips & Educational Visits", href: "/campus-life#field-trips" },
+] as const;
+
 export type NavItem = {
   title: string;
   href: string;
+  overviewLabel?: string;
   children?: readonly { title: string; href: string }[];
 };
 
@@ -45,8 +53,13 @@ export type NavItem = {
 export const navigation: readonly NavItem[] = [
   { title: "Home", href: "/" },
   { title: "About", href: "/about" },
-  { title: "Programmes", href: "/academics", children: courseLinks },
-  { title: "Clubs & Activities", href: "/campus-life" },
+  { title: "Programmes", href: "/academics", overviewLabel: "All Programmes", children: courseLinks },
+  {
+    title: "Clubs & Activities",
+    href: "/campus-life",
+    overviewLabel: "Overview",
+    children: activityLinks,
+  },
   { title: "Contact", href: "/contact" },
 ];
 

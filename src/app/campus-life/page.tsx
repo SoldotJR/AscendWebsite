@@ -39,7 +39,7 @@ export default function CampusLifePage() {
                 <FadeIn key={item.slug} delay={index * 0.04}>
                   <article
                     id={item.slug}
-                    className="grid overflow-hidden rounded-[1.5rem] bg-[#0f3d8c] shadow-soft md:grid-cols-2"
+                    className="scroll-mt-28 grid overflow-hidden rounded-[1.5rem] bg-[#0f3d8c] shadow-soft md:grid-cols-2"
                   >
                     <div className={`relative min-h-64 ${imageLeft ? "md:order-1" : "md:order-2"}`}>
                       <Image

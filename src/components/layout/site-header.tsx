@@ -81,7 +81,7 @@ function NavLink({
             className="absolute left-0 top-full z-50 pt-2"
             role="menu"
           >
-            <div className="min-w-[12rem] overflow-hidden rounded-xl border border-border bg-white py-2 shadow-soft">
+            <div className="min-w-[16rem] overflow-hidden rounded-xl border border-border bg-white py-2 shadow-soft">
               <Link
                 href={item.href}
                 role="menuitem"
@@ -94,7 +94,7 @@ function NavLink({
                   onNavigate?.();
                 }}
               >
-                All Programmes
+                {item.overviewLabel ?? "Overview"}
               </Link>
               {item.children?.map((child) => (
                 <Link
@@ -124,7 +124,7 @@ function NavLink({
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [coursesOpen, setCoursesOpen] = useState(false);
+  const [mobileOpenMenus, setMobileOpenMenus] = useState<string[]>([]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -135,7 +135,7 @@ export function SiteHeader() {
 
   useEffect(() => {
     setOpen(false);
-    setCoursesOpen(false);
+    setMobileOpenMenus([]);
   }, [pathname]);
 
   const navLinkClass =
@@ -217,19 +217,25 @@ export function SiteHeader() {
                     <button
                       type="button"
                       className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-lg font-bold text-[#0B1220]"
-                      aria-expanded={coursesOpen}
-                      onClick={() => setCoursesOpen((value) => !value)}
+                      aria-expanded={mobileOpenMenus.includes(item.href)}
+                      onClick={() =>
+                        setMobileOpenMenus((menus) =>
+                          menus.includes(item.href)
+                            ? menus.filter((href) => href !== item.href)
+                            : [...menus, item.href]
+                        )
+                      }
                     >
                       {item.title}
                       <ChevronDown
                         className={cn(
                           "h-4 w-4 transition-transform duration-200",
-                          coursesOpen && "rotate-180"
+                          mobileOpenMenus.includes(item.href) && "rotate-180"
                         )}
                       />
                     </button>
                     <AnimatePresence>
-                      {coursesOpen ? (
+                      {mobileOpenMenus.includes(item.href) ? (
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
@@ -246,7 +252,7 @@ export function SiteHeader() {
                               )}
                               onClick={() => setOpen(false)}
                             >
-                              All Programmes
+                              {item.overviewLabel ?? "Overview"}
                             </Link>
                             {item.children.map((child) => (
                               <Link
