@@ -17,7 +17,7 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 const fieldClass =
-  "h-12 w-full rounded-lg border-0 bg-[#f4f6f9] px-4 text-sm text-[#0B1220] outline-none ring-1 ring-transparent transition placeholder:text-[#8a97ab] focus:bg-white focus:ring-2 focus:ring-primary";
+  "h-12 w-full rounded-lg border-0 bg-white px-4 text-sm text-[#0B1220] outline-none ring-1 ring-transparent transition placeholder:text-[#8a97ab] focus:ring-2 focus:ring-accent-gold";
 
 export function ContactForm() {
   const [done, setDone] = useState(false);
@@ -64,7 +64,12 @@ export function ContactForm() {
           {...register("message")}
         />
       </Field>
-      <Button type="submit" size="lg" disabled={isSubmitting}>
+      <Button
+        type="submit"
+        size="lg"
+        disabled={isSubmitting}
+        className="bg-white text-[#0B1220] hover:bg-accent-gold"
+      >
         {isSubmitting ? "Sending..." : "Send Message"}
       </Button>
       {done ? (
@@ -87,7 +92,7 @@ function Field({
 }) {
   return (
     <label className="block space-y-2 text-sm">
-      <span className="font-semibold text-[#0B1220]">{label}</span>
+      <span className="font-semibold text-white">{label}</span>
       {children}
       {error ? <span className="block text-xs text-red-600">{error}</span> : null}
     </label>
