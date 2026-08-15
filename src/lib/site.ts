@@ -42,6 +42,12 @@ export const activityLinks = [
   { title: "Field Trips & Educational Visits", href: "/campus-life#field-trips" },
 ] as const;
 
+export const aboutLinks = [
+  { title: "About Us", href: "/about" },
+  { title: "Our Values", href: "/about/values" },
+  { title: "Faculty Members", href: "/about/faculty" },
+] as const;
+
 export type NavItem = {
   title: string;
   href: string;
@@ -52,7 +58,7 @@ export type NavItem = {
 /** Primary header tabs — Programmes lists each pathway as its own tab */
 export const navigation: readonly NavItem[] = [
   { title: "Home", href: "/" },
-  { title: "About", href: "/about" },
+  { title: "About", href: "/about", children: aboutLinks },
   { title: "Programmes", href: "/academics", overviewLabel: "All Programmes", children: courseLinks },
   {
     title: "Clubs & Activities",

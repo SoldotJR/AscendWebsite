@@ -1,13 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { courseLinks, siteConfig } from "@/lib/site";
+import { aboutLinks, courseLinks, siteConfig } from "@/lib/site";
 
-const aboutLinks = [
-  { title: "About Ascend", href: "/about" },
-  { title: "Contact", href: "/contact" },
-];
-
-const activityLinks = [
+const extraActivityLinks = [
   { title: "Clubs & Activities", href: "/campus-life" },
   { title: "Student Life", href: "/student-life" },
   { title: "Gallery", href: "/gallery" },
@@ -101,7 +96,7 @@ export function SiteFooter() {
               Extracurriculars
             </h3>
             <ul className="mt-4 space-y-3 text-sm text-white/90">
-              {activityLinks.map((link) => (
+              {extraActivityLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-accent-gold">
                     {link.title}

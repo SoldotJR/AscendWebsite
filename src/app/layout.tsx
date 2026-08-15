@@ -70,7 +70,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className="min-h-screen font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
+        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" enableSystem={false}>
           <ScrollProgress />
           <SiteHeader />
           <main className="flex-1">{children}</main>

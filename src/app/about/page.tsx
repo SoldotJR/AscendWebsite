@@ -1,166 +1,95 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { founders, pillars } from "@/data/content";
-import { PageHero } from "@/components/layout/page-hero";
-import { SectionHeading } from "@/components/ui/section-heading";
+import { founders } from "@/data/content";
 import { FadeIn } from "@/components/ui/fade-in";
 
 export const metadata: Metadata = {
-  title: "About Ascend",
+  title: "About Us",
   description:
-    "Learn about Ascend International School’s mission, vision, founders, and pathway to the world’s best universities.",
+    "Learn about Ascend International School’s mission, community, and the founders who built it.",
 };
-
-const timeline = [
-  {
-    year: "2024",
-    title: "Ascend is founded",
-    text: "Founded in Yangon to give ambitious students accelerated international pathways and serious university counselling.",
-  },
-  {
-    year: "Programs",
-    title: "Pathways take shape",
-    text: "Pre-IGCSE, IGCSE, International A Levels, GED, and OSSD form a coherent ladder toward global admissions.",
-  },
-  {
-    year: "Forward",
-    title: "Greater possibilities",
-    text: "Students continue ascending—through examinations, extracurricular depth, and offers from leading universities.",
-  },
-];
 
 export default function AboutPage() {
   return (
-    <>
-      <PageHero
-        eyebrow="About Ascend"
-        title="Your pathway to the best universities in the world."
-        description="Ascend International School offers IGCSE, O-Level, and A-Level programs designed to prepare students for top universities worldwide—with academic excellence, personal growth, and a supportive learning environment."
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "About" },
-        ]}
-      />
+    <div className="bg-white">
+      <section className="relative overflow-hidden pt-[72px]">
+        <div className="relative aspect-[16/7] min-h-[280px] w-full sm:min-h-[360px]">
+          <Image
+            src="/images/campus/gallery-6.jpg"
+            alt="Ascend International School community"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
+      </section>
 
-      <section className="section-padding">
-        <div className="container-ascend grid gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+      <section className="section-padding bg-white">
+        <div className="container-ascend mx-auto max-w-3xl text-center">
           <FadeIn>
-            <SectionHeading
-              eyebrow="Our Story"
-              title="Built for students ready to ascend."
-              description="We focus on academic excellence, personal growth, and a supportive learning environment where every student can thrive."
-            />
-            <div className="mt-8 space-y-4">
-              <blockquote className="rounded-[1.5rem] border border-border bg-card p-6 shadow-soft">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-royal">
-                  Mission
-                </p>
-                <p className="mt-4 font-serif text-2xl leading-relaxed">
-                  “Our mission is to provide a rigorous and globally-minded preparatory education
-                  that fosters intellectual curiosity, ethical leadership, and lifelong learning. We
-                  empower students to ascend beyond expectations.”
-                </p>
-              </blockquote>
-              <blockquote className="rounded-[1.5rem] border border-border bg-card p-6 shadow-soft">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent-gold">
-                  Vision
-                </p>
-                <p className="mt-4 font-serif text-2xl leading-relaxed">
-                  “At Ascend International School, we envision a world where every student has the
-                  tools, support, and inspiration to reach their highest potential and make
-                  meaningful contributions to society.”
-                </p>
-              </blockquote>
-            </div>
-          </FadeIn>
-          <FadeIn direction="right">
-            <div className="relative min-h-[28rem] overflow-hidden rounded-[2rem]">
-              <Image
-                src="/images/campus/gallery-2.jpg"
-                alt="Ascend learning environment"
-                fill
-                className="object-cover"
-                sizes="45vw"
-              />
-            </div>
+            <h1 className="text-4xl font-bold tracking-tight text-[#0B1220] md:text-6xl">About Us</h1>
+            <p className="mt-8 text-base leading-relaxed text-[#1f2a3d] md:text-lg">
+              Welcome to Ascend International School. We believe that true education extends far
+              beyond the covers of a textbook. Our mission is to ignite a lifelong passion for
+              learning, cultivate critical thinking, and build strong moral character in every
+              student who walks through our doors. Here at Ascend, we don&apos;t just teach for
+              tests—we prepare our young adults for life. Through individualized guidance, rigorous
+              academic programs, and an inclusive community, we empower students to discover their
+              unique strengths and ascend to their full potential. We invite you to explore our
+              campus, meet our dedicated faculty, and become part of our vibrant learning community.
+            </p>
+            <p className="mt-6 text-sm font-semibold text-[#0B1220] md:text-base">
+              — Dr. Elizabeth Vance, Head of School
+            </p>
           </FadeIn>
         </div>
       </section>
 
-      <section className="section-padding bg-surface-muted/50">
+      <section className="section-padding bg-[#f8fafc]">
         <div className="container-ascend">
-          <SectionHeading
-            eyebrow="The Four Pillars"
-            title="What every Ascend student experiences."
-            description="Accelerated programs, test preparation, university counseling, and extracurricular development—working as one system."
-          />
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {pillars.map((pillar, i) => (
-              <FadeIn key={pillar.title} delay={i * 0.05}>
-                <div className="h-full rounded-[1.5rem] border border-border bg-card p-6">
-                  <p className="text-xs font-bold text-accent-gold">0{i + 1}</p>
-                  <h3 className="mt-4 font-serif text-2xl">{pillar.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {pillar.description}
-                  </p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
+          <FadeIn>
+            <h2 className="text-center text-3xl font-bold tracking-tight text-[#0B1220] md:text-4xl">
+              Welcome Message
+            </h2>
+          </FadeIn>
 
-      <section className="section-padding">
-        <div className="container-ascend">
-          <SectionHeading
-            eyebrow="Timeline"
-            title="A young school with a clear direction."
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {timeline.map((item) => (
-              <div key={item.year} className="relative rounded-[1.5rem] border border-border p-6">
-                <p className="font-serif text-4xl text-royal">{item.year}</p>
-                <h3 className="mt-4 text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
-              </div>
-            ))}
+          <div className="mt-12 space-y-10 md:space-y-16">
+            {founders.map((founder, index) => {
+              const imageLeft = index % 2 === 0;
+              return (
+                <FadeIn key={founder.name} delay={index * 0.04}>
+                  <article className="grid items-center gap-8 overflow-hidden rounded-[1.5rem] border border-border bg-white p-6 shadow-soft md:grid-cols-2 md:gap-12 md:p-10">
+                    <div
+                      className={`relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[1.25rem] ${imageLeft ? "md:order-1" : "md:order-2"}`}
+                    >
+                      <Image
+                        src={founder.image}
+                        alt={founder.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 40vw"
+                      />
+                    </div>
+                    <div className={imageLeft ? "md:order-2" : "md:order-1"}>
+                      <p className="eyebrow">{founder.title}</p>
+                      <h3 className="mt-2 text-2xl font-bold text-[#0B1220] md:text-3xl">
+                        {founder.name}
+                      </h3>
+                      <p className="mt-2 text-sm font-medium text-muted-foreground">
+                        {founder.credentials.join(" · ")}
+                      </p>
+                      <p className="mt-5 text-base leading-relaxed text-[#1f2a3d]">
+                        {founder.message}
+                      </p>
+                    </div>
+                  </article>
+                </FadeIn>
+              );
+            })}
           </div>
         </div>
       </section>
-
-      <section className="section-padding">
-        <div className="container-ascend">
-          <SectionHeading
-            eyebrow="Founders"
-            title="Leadership shaped by world-class education."
-          />
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {founders.map((founder) => (
-              <article
-                key={founder.name}
-                className="flex gap-6 rounded-[2rem] border border-border bg-card p-6"
-              >
-                <Image
-                  src={founder.image}
-                  alt={founder.name}
-                  width={120}
-                  height={120}
-                  className="h-28 w-24 rounded-2xl object-cover"
-                />
-                <div>
-                  <p className="eyebrow">{founder.title}</p>
-                  <h3 className="mt-2 font-serif text-2xl">{founder.name}</h3>
-                  <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
-                    {founder.credentials.map((credential) => (
-                      <li key={credential}>{credential}</li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
+    </div>
   );
 }

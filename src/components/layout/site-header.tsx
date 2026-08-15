@@ -64,7 +64,7 @@ function NavLink({
         className={cn(className, "inline-flex items-center gap-1", isActive && "text-primary")}
         aria-expanded={open}
         aria-haspopup="menu"
-        onClick={() => setOpen((value) => !value)}
+        onClick={() => setOpen(true)}
       >
         {item.title}
         <ChevronDown
@@ -82,20 +82,19 @@ function NavLink({
             role="menu"
           >
             <div className="min-w-[16rem] overflow-hidden rounded-xl border border-border bg-white py-2 shadow-soft">
-              <Link
-                href={item.href}
-                role="menuitem"
-                className={cn(
-                  "block px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition hover:bg-[#f3f6fb] hover:text-primary",
-                  pathname === item.href && "text-primary"
-                )}
-                onClick={() => {
-                  setOpen(false);
-                  onNavigate?.();
-                }}
-              >
-                {item.overviewLabel ?? "Overview"}
-              </Link>
+              {item.overviewLabel ? (
+                <Link
+                  href={item.href}
+                  role="menuitem"
+                  className={cn(
+                    "block px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition hover:bg-[#f3f6fb] hover:text-primary",
+                    pathname === item.href && "text-primary"
+                  )}
+                  onClick={onNavigate}
+                >
+                  {item.overviewLabel}
+                </Link>
+              ) : null}
               {item.children?.map((child) => (
                 <Link
                   key={child.href}
@@ -105,10 +104,7 @@ function NavLink({
                     "block px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition hover:bg-[#f3f6fb] hover:text-primary",
                     pathname === child.href && "text-primary"
                   )}
-                  onClick={() => {
-                    setOpen(false);
-                    onNavigate?.();
-                  }}
+                  onClick={onNavigate}
                 >
                   {child.title}
                 </Link>
@@ -244,16 +240,18 @@ export function SiteHeader() {
                           className="overflow-hidden"
                         >
                           <div className="space-y-1 px-2 pb-3">
-                            <Link
-                              href={item.href}
-                              className={cn(
-                                "block rounded-lg px-3 py-2 text-base font-semibold text-[#0B1220] hover:bg-[#f3f6fb] hover:text-primary",
-                                pathname === item.href && "text-primary"
-                              )}
-                              onClick={() => setOpen(false)}
-                            >
-                              {item.overviewLabel ?? "Overview"}
-                            </Link>
+                            {item.overviewLabel ? (
+                              <Link
+                                href={item.href}
+                                className={cn(
+                                  "block rounded-lg px-3 py-2 text-base font-semibold text-[#0B1220] hover:bg-[#f3f6fb] hover:text-primary",
+                                  pathname === item.href && "text-primary"
+                                )}
+                                onClick={() => setOpen(false)}
+                              >
+                                {item.overviewLabel}
+                              </Link>
+                            ) : null}
                             {item.children.map((child) => (
                               <Link
                                 key={child.href}

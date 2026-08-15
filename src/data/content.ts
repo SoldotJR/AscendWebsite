@@ -272,12 +272,16 @@ export const founders = [
     title: "Founder",
     credentials: ["BA, Brown University (Ivy League)", "MPP, University of Oxford"],
     image: "/images/people/founder-1.jpg",
+    message:
+      "Welcome to Ascend International School. We founded this community so that ambitious young people in Myanmar could pursue a rigorous international education without leaving behind the care, character, and belonging they deserve. At Ascend, every student is known. We walk with you through examinations, university choices, and the quieter work of becoming a thoughtful adult. I am proud of what our students already achieve, and even prouder of the people they are becoming.",
   },
   {
     name: "Sayar Min Thaw Htut",
     title: "Founder",
     credentials: ["BA, University of Pennsylvania", "MBA, National University of Singapore"],
     image: "/images/people/founder-2.jpg",
+    message:
+      "Our promise is simple: we prepare young adults for life, not only for tests. That means high academic standards, honest feedback, and a school culture where curiosity and kindness sit side by side. Whether you are beginning Pre-IGCSE or aiming for competitive university admissions, you will find mentors who take your goals seriously. Thank you for trusting Ascend with this chapter of your journey. We look forward to ascending with you.",
   },
 ] as const;
 
@@ -357,35 +361,93 @@ export const events = [
   },
 ] as const;
 
-export const faculty = [
+export const facultyGroups = [
   {
-    name: "Sayar Thaw Zin Aung Gyi",
-    position: "Founder & Academic Leadership",
-    subjects: ["University Counseling", "Leadership"],
-    bio: "BA, Brown University; MPP, University of Oxford. Guides Ascend’s academic vision and university pathway strategy.",
-    image: "/images/people/founder-1.jpg",
+    title: "Leadership & Administration",
+    description:
+      "Our leadership team brings decades of international educational experience, strategic foresight, and a passion for student development. They guide our academic vision, maintain high institutional standards, and ensure that every student receives the guidance and resources required to excel.",
+    members: [
+      {
+        name: "Sayar Thaw Zin Aung Gyi",
+        position: "Founder & Academic Leadership",
+        subjects: ["University Counseling", "Leadership"],
+        bio: "BA, Brown University; MPP, University of Oxford. Guides Ascend’s academic vision and university pathway strategy.",
+        image: "/images/people/founder-1.jpg",
+      },
+      {
+        name: "Sayar Min Thaw Htut",
+        position: "Founder & Strategic Leadership",
+        subjects: ["Strategy", "Student Development"],
+        bio: "BA, University of Pennsylvania; MBA, National University of Singapore. Champions personalized learning and institutional growth.",
+        image: "/images/people/founder-2.jpg",
+      },
+    ],
   },
   {
-    name: "Sayar Min Thaw Htut",
-    position: "Founder & Strategic Leadership",
-    subjects: ["Strategy", "Student Development"],
-    bio: "BA, University of Pennsylvania; MBA, National University of Singapore. Champions personalized learning and institutional growth.",
-    image: "/images/people/founder-2.jpg",
+    title: "Teaching Staff & Specialists",
+    description:
+      "Our teachers are subject-matter experts, mentors, and innovators. Recruited from top institutions worldwide, our faculty members specialize in active learning, differentiated instruction, and digital literacy. They dedicate themselves to recognizing each child’s learning style and nurturing their personal growth.",
+    members: [
+      {
+        name: "Science Faculty",
+        position: "STEM Specialists",
+        subjects: ["Physics", "Chemistry", "Biology"],
+        bio: "Subject specialists who bring laboratory thinking, inquiry, and examination excellence into every science classroom.",
+        image: "/images/people/faculty-1.jpg",
+      },
+      {
+        name: "Mathematics Faculty",
+        position: "Mathematics Specialists",
+        subjects: ["Mathematics", "Further Mathematics"],
+        bio: "Mentors who build confident problem-solvers through clear explanation, practice, and stretch for every learner.",
+        image: "/images/campus/gallery-7.jpg",
+      },
+      {
+        name: "English Faculty",
+        position: "Language Specialists",
+        subjects: ["English", "Academic Writing"],
+        bio: "Teachers who strengthen communication, critical reading, and the writing skills students need for global study.",
+        image: "/images/campus/gallery-1.jpg",
+      },
+      {
+        name: "Business & Humanities Faculty",
+        position: "Humanities Specialists",
+        subjects: ["Business", "Economics", "Accounting"],
+        bio: "Educators who connect classroom theory to real-world enterprise, ethics, and informed decision-making.",
+        image: "/images/campus/gallery-4.jpg",
+      },
+    ],
   },
   {
-    name: "Faculty Team",
-    position: "IGCSE & A-Level Instructors",
-    subjects: ["Sciences", "Mathematics", "Business", "English"],
-    bio: "Experienced instructors delivering intensive curricula with student-centered methods and examination focus.",
-    image: "/images/people/faculty-1.jpg",
+    title: "Student Care & Counseling Team",
+    description:
+      "Education at Ascend addresses the whole child. Our dedicated team of academic advisors, university counselors, and pastoral care staff work side-by-side with teachers and parents. They provide social-emotional support, career roadmapping, and university placement guidance every step of the way.",
+    members: [
+      {
+        name: "University Counseling",
+        position: "Admissions Counselors",
+        subjects: ["Applications", "SAT / IELTS / TOEFL"],
+        bio: "Counselors who help students build strong university shortlists, essays, testing plans, and scholarship strategies.",
+        image: "/images/people/faculty-2.jpg",
+      },
+      {
+        name: "Student Care Team",
+        position: "Pastoral Support",
+        subjects: ["Wellbeing", "Academic Advising"],
+        bio: "Advisors who partner with families to support wellbeing, belonging, and the day-to-day habits that help students thrive.",
+        image: "/images/campus/gallery-3.jpg",
+      },
+    ],
   },
-  {
-    name: "Counseling Team",
-    position: "University Admissions Counselors",
-    subjects: ["Applications", "SAT / IELTS / TOEFL"],
-    bio: "Dedicated counselors supporting shortlists, essays, testing, and scholarship strategy for global admissions.",
-    image: "/images/people/faculty-2.jpg",
-  },
+] as const;
+
+export const educationalApproach = [
+  "We begin with the student: class sizes stay small so teachers can recognize each learner’s pace, strengths, and next challenge.",
+  "International curricula—Pre-IGCSE, IGCSE, International A Levels, GED, and OSSD—are taught with clear goals, frequent feedback, and examination readiness.",
+  "Guidance is individualized. Academic advisors and university counselors work with students and families from the first term onward.",
+  "Learning is active. Discussion, projects, digital literacy, and real-world internships sit alongside rigorous subject study.",
+  "Character matters as much as grades. We expect curiosity, integrity, respect for diversity, and responsibility to the community.",
+  "Support is whole-child. Pastoral care, clubs, and student leadership give young people space to grow in confidence as well as knowledge.",
 ] as const;
 
 export const faqs = [
